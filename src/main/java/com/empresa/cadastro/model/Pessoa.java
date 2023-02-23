@@ -2,14 +2,31 @@ package com.empresa.cadastro.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
+@Entity
 public class Pessoa {
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name= "idPessoa")
     private Long id;
     private String nome;
     private String dataNascimento;
 
+    @OneToMany(mappedBy = "pessoa")
+    @JsonIgnore
     private List<Endereco> enderecos;
 
+    @OneToOne
     private Endereco enderecoPrincipal;
     
 	public Pessoa() {
