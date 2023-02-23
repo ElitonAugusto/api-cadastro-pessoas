@@ -15,20 +15,20 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name= "idEndereço")
 	private Long id;
-	private String logadouro;
+	private String logradouro;
 	private String cep;
 	private String cidade;
 	private String numero;
 	
 	@ManyToOne
-	@JoinColumn(name = "idPessoa")
+	@JoinColumn(name = "idDaPessoa")
 	private Pessoa pessoa;
 	
 	public Endereco() {
 	}
 
 	public Endereco(String logadouro, String cep, String cidade, String numero, Pessoa pessoa) {
-		this.logadouro = logadouro;
+		this.logradouro = logadouro;
 		this.cep = cep;
 		this.cidade = cidade;
 		this.numero = numero;
@@ -43,12 +43,12 @@ public class Endereco {
 		this.id = id;
 	}
 
-	public String getLogadouro() {
-		return logadouro;
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	public void setLogadouro(String logadouro) {
-		this.logadouro = logadouro;
+	public void setLogradouro(String logadouro) {
+		this.logradouro = logadouro;
 	}
 
 	public String getCep() {
