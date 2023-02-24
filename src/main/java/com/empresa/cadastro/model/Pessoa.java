@@ -1,9 +1,6 @@
 package com.empresa.cadastro.model;
 
 import java.util.List;
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Pessoa {
@@ -24,26 +20,16 @@ public class Pessoa {
     private String nome;
     private String dataNascimento;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Endereco> enderecos;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Endereco enderecoPrincipal;
 
 	public Pessoa() {
 	}
 
-	public Pessoa(String nome, String dataNascimento, List<Endereco> enderecos, Endereco enderecoPrincipal) {
+	public Pessoa(String nome, String dataNascimento, List<Endereco> enderecos) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.enderecos = enderecos;
-		this.enderecoPrincipal = enderecoPrincipal;
-	}
-
-	public Pessoa(String nome, String dataNascimento) {
-		this.nome = nome;
-		this.dataNascimento = dataNascimento;
 	}
 
 	public Long getId() {
@@ -76,33 +62,5 @@ public class Pessoa {
 
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
-	}
-
-	public Endereco getEnderecoPrincipal() {
-		return enderecoPrincipal;
-	}
-
-	public void setEnderecoPrincipal(Endereco enderecoPrincipal) {
-		this.enderecoPrincipal = enderecoPrincipal;
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(dataNascimento, enderecoPrincipal, enderecos, id, nome);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pessoa other = (Pessoa) obj;
-		return Objects.equals(dataNascimento, other.dataNascimento)
-				&& Objects.equals(enderecoPrincipal, other.enderecoPrincipal)
-				&& Objects.equals(enderecos, other.enderecos) && Objects.equals(id, other.id)
-				&& Objects.equals(nome, other.nome);
 	}
 }

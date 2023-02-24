@@ -1,5 +1,7 @@
 package com.empresa.cadastro.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,22 +15,26 @@ public class Endereco {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name= "idEndereço")
+	@Column(name= "idEndereco")
 	private Long id;
+	private String observacao;
 	private String logradouro;
 	private String cep;
 	private String cidade;
 	private String numero;
 	
 	@ManyToOne
-	@JoinColumn(name = "idDaPessoa")
+	@JoinColumn(name = "idPessoa")
+	@JsonBackReference
 	private Pessoa pessoa;
 	
 	public Endereco() {
 	}
 
-	public Endereco(String logadouro, String cep, String cidade, String numero, Pessoa pessoa) {
-		this.logradouro = logadouro;
+	public Endereco(String observacao, String logradouro, String cep, String cidade, String numero, Pessoa pessoa) {
+		super();
+		this.observacao = observacao;
+		this.logradouro = logradouro;
 		this.cep = cep;
 		this.cidade = cidade;
 		this.numero = numero;
@@ -43,12 +49,19 @@ public class Endereco {
 		this.id = id;
 	}
 
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
 	public String getLogradouro() {
 		return logradouro;
 	}
 
-	public void setLogradouro(String logadouro) {
-		this.logradouro = logadouro;
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
 
 	public String getCep() {
