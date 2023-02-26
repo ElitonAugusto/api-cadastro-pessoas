@@ -1,6 +1,9 @@
 package com.empresa.cadastro.model;
 
+import java.time.LocalDate;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,7 +21,9 @@ public class Pessoa {
 	@Column(name= "idPessoa")
     private Long id;
     private String nome;
-    private String dataNascimento;
+    
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Endereco> enderecos;
